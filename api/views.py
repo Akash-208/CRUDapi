@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from api.models import Employee
@@ -9,7 +9,14 @@ from . serializer import EmployeeSerializer
 # Create your views here.
 
 def Home(request):
-    return HttpResponse("hii this is home page")
+        paths = {
+        'users' : "For getting all user details",
+        'user/id':"for getting a specific user",
+        'new':"for creating a new user",
+        'update/id':'for updating the data of a user',
+        'delete/id':"for deleting a specific user's datat"
+    }
+    return JsonResponse(paths)
 
 @api_view(['GET'])
 def Users(request):
